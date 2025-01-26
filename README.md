@@ -185,7 +185,22 @@ Le projet inclut un chatbot pour l'interaction avec les utilisateurs, alimenté 
    - Utilisez JavaScript ou React pour une communication en temps réel avec l'API du chatbot.
 
 ---
+## Audit Log
 
+### Vue d'ensemble
+Une section d'audit log a été mise en place pour enregistrer les prédictions effectuées par le modèle d'apprentissage automatique ainsi que les informations des patients. Cela permet un suivi précis des activités et des prédictions.
+
+### Fonctionnalité
+- Les logs d'audit enregistrent les détails suivants :
+  - ID du patient
+  - Nom
+  - Prénom
+  - Genre
+  - Âge
+  - Résultat de la prédiction
+  - Horodatage de la création
+---
+  
 ## Utilisation
 
 ### Entraînement du modèle
