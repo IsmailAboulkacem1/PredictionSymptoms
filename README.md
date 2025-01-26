@@ -34,7 +34,7 @@ Pour exécuter le projet en local, suivez ces étapes :
    code .
    ```
 
-2. **Configurer l'environnement virtuel** :
+2. **Configurer l'environnement virtuel(si il n'existe pas)** :
    ```bash
    python -m venv env
    source env/bin/activate  # Pour Linux/Mac
@@ -43,14 +43,9 @@ Pour exécuter le projet en local, suivez ces étapes :
 
 3. **Installer les dépendances** :
    ```bash
-   pip install Django joblib scikit-learn requests pandas google-api-python-client google-generativeai
+   pip install Django joblib scikit-learn requests pandas google-api-python-client google-generativeai grpcio
    ```
-
-4. **Exécuter les migrations de base de données** :
-   ```bash
-   python manage.py migrate
-   ```
-
+   
 5. **Créer un utilisateur administrateur** :
    ```bash
    python manage.py createsuperuser
