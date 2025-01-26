@@ -33,14 +33,7 @@ Pour exécuter le projet en local, suivez ces étapes :
    ```bash
    code .
    ```
-
-2. **Configurer l'environnement virtuel(si il n'existe pas!!!)** :
-   ```bash
-   python -m venv env
-   source env/bin/activate  # Pour Linux/Mac
-   env\Scripts\activate    # Pour Windows
-   ```
-
+   
 3. **Installer les dépendances** :
    ```bash
    pip install Django joblib scikit-learn requests pandas google-api-python-client google-generativeai grpcio
