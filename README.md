@@ -17,6 +17,9 @@ PredictionSymptoms/
 ├── predictor/          # Modèles d'apprentissage automatique et logique
 ```
 
+## Testé avec
+Ce projet a été testé avec **Python 3.12.2**.
+
 ## Instructions d'installation
 Pour exécuter le projet en local, suivez ces étapes :
 
