@@ -34,7 +34,7 @@ Pour exécuter le projet en local, suivez ces étapes :
    code .
    ```
 
-2. **Configurer l'environnement virtuel(si il n'existe pas)** :
+2. **Configurer l'environnement virtuel(si il n'existe pas!!!)** :
    ```bash
    python -m venv env
    source env/bin/activate  # Pour Linux/Mac
