@@ -51,6 +51,10 @@ Pour exécuter le projet en local, suivez ces étapes :
    ```bash
    python manage.py runserver
    ```
+   **Example** :
+   ```bash
+   "Path_to"\PredictionSymptoms\PredictionSymptoms> python manage.py runserver
+   ```
 
 7. Accédez à l'application à l'adresse `http://127.0.0.1:8000/admin/` pour l'interface administrateur ou `http://127.0.0.1:8000` pour l'application principale.
 
