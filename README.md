@@ -24,9 +24,14 @@ Ce projet a été testé avec **Python 3.12.2**.
 Pour exécuter le projet en local, suivez ces étapes :
 
 1. **Cloner le dépôt** :
-   ```bash
+    ```bash
    git clone https://github.com/ismail01100/PredictionSymptoms.git
+    ```
+   ```bash
    cd PredictionSymptoms
+   ```
+   ```bash
+   code .
    ```
 
 2. **Configurer l'environnement virtuel** :
