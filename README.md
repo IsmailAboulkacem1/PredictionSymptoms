@@ -33,14 +33,7 @@ Pour exécuter le projet en local, suivez ces étapes :
    ```bash
    code .
    ```
-
-2. **Configurer l'environnement virtuel(si il n'existe pas!!!)** :
-   ```bash
-   python -m venv env
-   source env/bin/activate  # Pour Linux/Mac
-   env\Scripts\activate    # Pour Windows
-   ```
-
+   
 3. **Installer les dépendances** :
    ```bash
    pip install Django joblib scikit-learn requests pandas google-api-python-client google-generativeai grpcio
@@ -57,6 +50,10 @@ Pour exécuter le projet en local, suivez ces étapes :
 6. **Démarrer le serveur de développement** :
    ```bash
    python manage.py runserver
+   ```
+   **Example** :
+   ```bash
+   "Path_to"\PredictionSymptoms\PredictionSymptoms> python manage.py runserver
    ```
 
 7. Accédez à l'application à l'adresse `http://127.0.0.1:8000/admin/` pour l'interface administrateur ou `http://127.0.0.1:8000` pour l'application principale.
@@ -188,7 +185,22 @@ Le projet inclut un chatbot pour l'interaction avec les utilisateurs, alimenté 
    - Utilisez JavaScript ou React pour une communication en temps réel avec l'API du chatbot.
 
 ---
+## Audit Log
 
+### Vue d'ensemble
+Une section d'audit log a été mise en place pour enregistrer les prédictions effectuées par le modèle d'apprentissage automatique ainsi que les informations des patients. Cela permet un suivi précis des activités et des prédictions.
+
+### Fonctionnalité
+- Les logs d'audit enregistrent les détails suivants :
+  - ID du patient
+  - Nom
+  - Prénom
+  - Genre
+  - Âge
+  - Résultat de la prédiction
+  - Horodatage de la création
+---
+  
 ## Utilisation
 
 ### Entraînement du modèle
