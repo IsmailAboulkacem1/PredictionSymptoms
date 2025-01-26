@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'predictor',
+    'accounts',
 ]
-
+LOGIN_URL = '/accounts/login/'    # new The path to your login page
+AUTH_USER_MODEL = 'accounts.Medecin' #new
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # new Default authentication backend
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +60,9 @@ ROOT_URLCONF = 'PredictionSymptoms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / '/templates',  # Update this path
+                BASE_DIR / 'accounts/templates',
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,20 +92,20 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+#AUTH_PASSWORD_VALIDATORS = [
+  #  {
+     #   'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+  #  },
+ #   {
+     #   'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+ #   },
+ #   {
+    #    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+ #   },
+  #  {
+     #   'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+  #  },
+#]
 
 
 # Internationalization

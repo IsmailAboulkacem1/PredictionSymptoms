@@ -1,0 +1,252 @@
+{% extends 'predictor/base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone ChatGPT</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f7f8fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chat container styles */
+        .chat-container {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background-color: #ffffff;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #ffffff;
+            padding: 15px;
+            border-bottom: 1px solid #e6e6e6;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header button {
+            background-color: #f44336;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-header button:hover {
+            background-color: #d32f2f;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .chat-message.bot {
+            align-self: flex-start;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .chat-message .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #d9d9d9;
+        }
+
+        .chat-message .message-content {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-message.bot .message-content {
+            background-color: #f0f0f0;
+            color: #333333;
+        }
+
+        .chat-message.user .message-content {
+            background-color: #0078d7;
+            color: #ffffff;
+        }
+
+        .chat-footer {
+            padding: 15px;
+            border-top: 1px solid #e6e6e6;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #e6e6e6;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-footer button {
+            background-color: #0078d7;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-footer button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Scrollbar Styles */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #cccccc;
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background-color: #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar 
+    <div class="navbar">
+        <div class="navbar-brand">
+            <a href="/">Accueil</a>
+        </div>
+        <div class="navbar-links">
+            <a href="/chatbot/">Chatbot</a>
+            <a href="/about/">À propos</a>
+            <a href="/contact/">Contact</a>
+        </div>
+    </div>-->
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <span>Clone de ChatGPT</span>
+            <button id="clear-chat" type="button">Effacer</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages -->
+            {% for message in dialogue_history %}
+                {% if message.role == 'assistant' %}
+                    <div class="chat-message bot">
+                        <div class="avatar"></div>
+                        <div class="message-content">
+                            {{ message.content }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="chat-message user">
+                        <div class="avatar"></div>
+                        <div class="message-content">
+                            {{ message.content }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <form method="POST" class="chat-footer">
+            {% csrf_token %}
+            <input type="text" id="user_response" name="user_response" placeholder="Écrivez votre message..." required>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('clear-chat').addEventListener('click', function () {
+            if (confirm('Êtes-vous sûr de vouloir effacer toute la conversation ?')) {
+                fetch('/chatbot/clear/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('chat-messages').innerHTML = '';
+                        alert('Historique effacé avec succès.');
+                    } else {
+                        alert(data.message || 'Erreur inconnue.');
+                    }
+                })
+                .catch(error => alert('Une erreur est survenue : ' + error));
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

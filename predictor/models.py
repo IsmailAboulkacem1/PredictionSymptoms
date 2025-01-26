@@ -6,6 +6,7 @@ class Prediction(models.Model):
     predicted_disease = models.CharField(max_length=100)
     prediction_date = models.DateTimeField(auto_now_add=True)
 
+
 class AuditLogs(models.Model):
     id_patient = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)

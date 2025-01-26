@@ -1,0 +1,66 @@
+{% extends 'predictor/base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-5 shadow" style="max-width: 450px; width: 100%;">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="text" name="username" id="id_username" class="form-control form-control-lg" value="{{ form.username.value|default:'' }}" placeholder="Username" required>
+                    <label for="id_username">Username</label>
+                </div>
+            </div>
+
+            <!-- First Name Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="text" name="first_name" id="id_first_name" class="form-control form-control-lg" value="{{ form.first_name.value|default:'' }}" placeholder="First Name" required>
+                    <label for="id_first_name">First Name</label>
+                </div>
+            </div>
+
+            <!-- Last Name Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="text" name="last_name" id="id_last_name" class="form-control form-control-lg" value="{{ form.last_name.value|default:'' }}" placeholder="Last Name" required>
+                    <label for="id_last_name">Last Name</label>
+                </div>
+            </div>
+
+            <!-- Specialite Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="text" name="specialite" id="id_specialite" class="form-control form-control-lg" value="{{ form.specialite.value|default:'' }}" placeholder="Speciality">
+                    <label for="id_specialite">Speciality</label>
+                </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="password" name="password1" id="id_password1" class="form-control form-control-lg" value="{{ form.password1.value|default:'' }}" placeholder="Password" required>
+                    <label for="id_password1">Password</label>
+                </div>
+            </div>
+
+            <!-- Password Confirmation Field -->
+            <div class="form-group mb-4">
+                <div class="form-floating">
+                    <input type="password" name="password2" id="id_password2" class="form-control form-control-lg" value="{{ form.password2.value|default:'' }}" placeholder="Confirm Password" required>
+                    <label for="id_password2">Confirm Password</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Register</button>
+        </form>
+
+        <div class="mt-3 text-center">
+            <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
